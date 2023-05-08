@@ -22,6 +22,8 @@ build-windows: format get
 build-darwin: format get
 	CGO_ENABLED=0 GOOS="darwin" GOARCH=${TARGET_ARCH} go build -v -o kbot -ldflags "-X="github.com/vbdevel/kbot/cmd.appversion=${VERSION}
 
+image:
+	docker build --build-arg OS="linux" . -t ${REGISTRY}/${APP}:${VERSION}-${TARGET_ARCH}	
 arm:
 	docker build --build-arg OS="arm" . -t ${REGISTRY}/${APP}:${VERSION}-${TARGET_ARCH}	
 linux:
